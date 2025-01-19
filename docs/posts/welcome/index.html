@@ -183,20 +183,20 @@ window.Quarto = {
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>As data scientists, we are often interested in finding relationships between different variables in our datasets. For instance, we might want to find out how one’s education level can impact future earnings or how movement in the US stock market is related to economic indicators such as the country’s gross domestic product (‘GDP’).</p>
-<p>One of the commonly used tool to answer such questions is the linear regression model. At its core, a linear regression model seeks to establish a linear relationship between a dependent variable Y and one or more explanatory variables X. The model finds a line or hyperplane through the data points by minimizing the difference between the predicted values and the actual observed values. This difference is quantified using a metric called sum of squared errors (‘SSE’), and the model uses a method called ordinary least squares (‘OLS’) to minimize it.</p>
+<p>One of the commonly used tool to answer such questions is the linear regression model. At its core, a linear regression model seeks to establish a linear relationship between a dependent variable Y and one or more explanatory variables X.</p>
 <p>The mathematical formula of a linear regression is expressed as:</p>
 <p><span class="math inline">\(Yi = \beta_0 + \beta_1X_{1,i} + \beta_2X_{2,i} + \dots + \beta_kX_{k,i} + \varepsilon_{i}\)</span></p>
 <p>Where:</p>
 <ul>
 <li><strong><span class="math inline">\(Yi\)</span>:</strong> the dependent variable (the outcome we are interested in - annual salary or the S&amp;P 500 index from the examples above)<br>
 </li>
-<li><strong><span class="math inline">\(\beta_0\)</span>:</strong> the intercept of the line (the ‘starting’ or ‘base’ value of Y - what Y is when all X’s are zero)<br>
+<li><strong><span class="math inline">\(\beta_0\)</span>:</strong> the intercept of the line (the ‘starting’ or ‘base’ value of Y - what Y is when the X’s all are zero)<br>
 </li>
 <li><strong><span class="math inline">\(\beta_1, \beta_2, \dots, \beta_k\)</span>:</strong> the coefficients of the explanatory variables (how much each X contribute to Y)<br>
 </li>
 <li><strong><span class="math inline">\(\varepsilon_{i}\)</span>:</strong> the error term (the variation in Y that is not explained by the X’s in the model)</li>
 </ul>
-<p>To illustrate with an example, say we would like to understand how education level and years of experience in the current job impacts a person’s annual salary when they are 35. To answer this question, we can set up a linear regression model:</p>
+<p>To illustrate with an example, say we would like to understand how education level and years of experience in the current job impacts a person’s annual salary. To answer this question, we can set up a linear regression model:</p>
 <p><span class="math inline">\(\text{Annual Salary}_i = \beta_0 + \beta_1\text{Years of Education}_i + \beta_2\text{Years in Current Job}_{i} + \varepsilon_{i}\)</span></p>
 <p>Where:</p>
 <ul>
@@ -212,26 +212,27 @@ window.Quarto = {
 </ul>
 <section id="linear-regression-assumptions" class="level4">
 <h4 class="anchored" data-anchor-id="linear-regression-assumptions">Linear regression assumptions</h4>
-<p>While linear regression is versatile and simple to interpret, it relies on several key assumptions that may limit its applicability in real-world scenarios.</p>
+<p>While linear regression is versatile and simple to interpret, it relies on several key assumptions that may limit its applicability to real-world scenarios.</p>
 <ol type="1">
 <li><p><strong>Linearity:</strong> the relationship between the response variable (Y) and explanatory variables (X) are assumed to be linear. In other words, the response variable (Y) is expressed as a sum of the products of each individual explanatory variable and their corresponding coefficient term. This means changes in X’s have a consistent effect on Y.</p></li>
 <li><p><strong>Normality:</strong> the error terms (the difference between the predicted values and observed values) are assumed to be normally distributed.</p></li>
-<li><p><strong>Independence of errors:</strong> - the error terms are independent of each other, meaning error made in predicting one observation should not be related to the error made in predicting another observation.</p></li>
+<li><p><strong>Independence of errors:</strong> the error terms are independent of each other, meaning error made in predicting one observation should not be related to the error made in predicting another observation.</p></li>
 <li><p><strong>Homoscedasticity:</strong> the error terms have all the same variance: <span class="math inline">\(Var(\varepsilon_{i}) = \sigma^2\)</span></p></li>
 </ol>
-<p>One of the key restrictions of linear regression, particularly as a result of the linearity assumption, is that the model allows the response variable to take on any real value. However, this is often not the case in many scenarios where the response variable in question may have more restrictive nature. For example, we may want to predict whether a customer will churn based on their past interactions with the company (the response variable is binary - yes or no) or we want to model the number of car accidents in the city based on factors like weather, traffic volumne etc. (the response variable here will be count data which are non-negative integers).</p>
+<p>One of the key restrictions of linear regression, particularly as a result of the linearity assumption, is that the model allows the response variable to take on any real value.</p>
+<p>However, this is often not the case in many scenarios where the response variable is binary or discrete by nature. For example, we may want to predict whether a customer will churn based on their past shopping behaviour (the response variable is binary - yes or no) or we want to model the number of car accidents in the city based on factors like weather or traffic volumne (the response variable here will be count data which are non-negative integers).</p>
 </section>
 </section>
 <section id="introduction-to-generalized-linear-models" class="level2">
 <h2 class="anchored" data-anchor-id="introduction-to-generalized-linear-models">Introduction to Generalized Linear Models</h2>
-<p>The limitations of linear regression lead us to consider more flexible models and this is where Generalized Linear Models (‘GLMs’) come into play. GLMs a broad class of models that extend traditional linear regression to handle a variety of response variables beyond just continuous data.</p>
+<p>The limitations of linear regression lead us to consider more flexible models and this is where Generalized Linear Models (‘GLMs’) come into play. GLMs is a broad class of models that extend traditional linear regression to handle a variety of response variables beyond just continuous data.</p>
 <p>A GLM consists of three components:</p>
 <ol type="1">
 <li><strong>Random component</strong>: Each response <span class="math inline">\(Yi, \dots, Yn\)</span> is a random variable with its respective mean <span class="math inline">\(\mu_i\)</span></li>
 <li><strong>Systematic component</strong>: How the k explanatory variables come into the model denoted as a linear combination: <span class="math inline">\(\eta_i = \beta_0 + \beta_1 X_{i,1} + \beta_2 X_{i,2} + \ldots + \beta_k X_{i,k}\)</span></li>
 <li><strong>Link function</strong>: The element that connects the random component with the systematic component <span class="math inline">\(\eta_i\)</span>. The connection is made through a function of <span class="math inline">\(\eta_i: h(\eta_i) = \mu_i\)</span></li>
 </ol>
-<p>Let us look at two common GLMs, the Logistic Regression, and the Poisson Regression.</p>
+<p>Let us look at two common GLMs, the Logistic Regression and the Poisson Regression.</p>
 <section id="logistic-regression" class="level3">
 <h3 class="anchored" data-anchor-id="logistic-regression">Logistic Regression</h3>
 <p>The logistic regression is widely used in situations where the response variable is binary or categorical. Unlike linear regression, which predicts continuous outcomes, logistic regression predicts probabilities. Through the logit link function, it models the probability of an event occurring (e.g., success or failure, yes or no) into a linear relationship with the explanatory variables.</p>
@@ -266,7 +267,7 @@ window.Quarto = {
 </section>
 <section id="closing-note" class="level3">
 <h3 class="anchored" data-anchor-id="closing-note">Closing note</h3>
-<p>In short, understanding linear and generalized linear models provides data scientists with powerful tools to model a wide range of data. While we’ve explored logistic and poisson regression, it’s worth noting that there are many other GLMs, each tailored to address specific types of data and research questions, making this family of models incredibly versatile.</p>
+<p>In short, understanding linear and generalized linear models provides data scientists with powerful tools to model a wide range of data. While we’ve explored logistic and poisson regression, it’s worth noting that there are many other GLMs, each tailored to address specific types of data, making this family of models incredibly versatile.</p>
 
 
 </section>

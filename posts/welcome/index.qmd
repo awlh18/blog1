@@ -7,7 +7,7 @@ date: "2025-01-18"
 ## Introduction
 As data scientists, we are often interested in finding relationships between different variables in our datasets. For instance, we might want to find out how one's education level can impact future earnings or how movement in the US stock market is related to economic indicators such as the country's gross domestic product ('GDP'). 
 
- One of the commonly used tool to answer such questions is the linear regression model. At its core, a linear regression model seeks to establish a linear relationship between a dependent variable Y and one or more explanatory variables X. The model finds a line or hyperplane through the data points by minimizing the difference between the predicted values and the actual observed values. This difference is quantified using a metric called sum of squared errors ('SSE'), and the model uses a method called ordinary least squares ('OLS') to minimize it.
+ One of the commonly used tool to answer such questions is the linear regression model. At its core, a linear regression model seeks to establish a linear relationship between a dependent variable Y and one or more explanatory variables X. 
  
  The mathematical formula of a linear regression is expressed as:
 
@@ -16,11 +16,11 @@ As data scientists, we are often interested in finding relationships between dif
  Where:
 
 - **$Yi$:**  the dependent variable (the outcome we are interested in - annual salary or the S&P 500 index from the examples above) \
-- **$\beta_0$:**  the intercept of the line (the 'starting' or 'base' value of Y - what Y is when all X's are zero) \
+- **$\beta_0$:**  the intercept of the line (the 'starting' or 'base' value of Y - what Y is when the X's all are zero) \
 - **$\beta_1, \beta_2, \dots, \beta_k$:**  the coefficients of the explanatory variables (how much each X contribute to Y) \
 - **$\varepsilon_{i}$:**  the error term (the variation in Y that is not explained by the X's in the model)
 
-To illustrate with an example, say we would like to understand how education level and years of experience in the current job impacts a person's annual salary when they are 35. To answer this question, we can set up a linear regression model: 
+To illustrate with an example, say we would like to understand how education level and years of experience in the current job impacts a person's annual salary. To answer this question, we can set up a linear regression model: 
 
 $\text{Annual Salary}_i = \beta_0 + \beta_1\text{Years of Education}_i + \beta_2\text{Years in Current Job}_{i} + \varepsilon_{i}$
 
@@ -34,21 +34,23 @@ $\text{Annual Salary}_i = \beta_0 + \beta_1\text{Years of Education}_i + \beta_2
 
 
 #### Linear regression assumptions
-While linear regression is versatile and simple to interpret, it relies on several key assumptions that may limit its applicability in real-world scenarios. 
+While linear regression is versatile and simple to interpret, it relies on several key assumptions that may limit its applicability to real-world scenarios. 
 
 1. **Linearity:** the relationship between the response variable (Y) and explanatory variables (X) are assumed to be linear. In other words, the response variable (Y) is expressed as a sum of the products of each individual explanatory variable and their corresponding coefficient term. This means changes in X's have a consistent effect on Y. 
 
 2. **Normality:** the error terms (the difference between the predicted values and observed values) are assumed to be normally distributed. 
 
-3. **Independence of errors:** - the error terms are independent of each other, meaning error made in predicting one observation should not be related to the error made in predicting another observation.
+3. **Independence of errors:** the error terms are independent of each other, meaning error made in predicting one observation should not be related to the error made in predicting another observation.
 
 4. **Homoscedasticity:** the error terms have all the same variance: $Var(\varepsilon_{i}) = \sigma^2$
 
-One of the key restrictions of linear regression, particularly as a result of the linearity assumption, is that the model allows the response variable to take on any real value. However, this is often not the case in many scenarios where the response variable in question may have more restrictive nature. For example, we may want to predict whether a customer will churn based on their past interactions with the company (the response variable is binary - yes or no) or we want to model the number of car accidents in the city based on factors like weather, traffic volumne etc. (the response variable here will be count data which are non-negative integers). 
+One of the key restrictions of linear regression, particularly as a result of the linearity assumption, is that the model allows the response variable to take on any real value. 
+
+However, this is often not the case in many scenarios where the response variable is binary or discrete by nature. For example, we may want to predict whether a customer will churn based on their past shopping behaviour (the response variable is binary - yes or no) or we want to model the number of car accidents in the city based on factors like weather or traffic volumne  (the response variable here will be count data which are non-negative integers). 
 
 ## Introduction to Generalized Linear Models 
 
-The limitations of linear regression lead us to consider more flexible models and this is where Generalized Linear Models ('GLMs') come into play. GLMs a broad class of models that extend traditional linear regression to handle a variety of response variables beyond just continuous data. 
+The limitations of linear regression lead us to consider more flexible models and this is where Generalized Linear Models ('GLMs') come into play. GLMs is a broad class of models that extend traditional linear regression to handle a variety of response variables beyond just continuous data. 
 
 A GLM consists of three components: 
 
@@ -56,7 +58,7 @@ A GLM consists of three components:
 2. **Systematic component**: How the k explanatory variables come into the model denoted as a linear combination: $\eta_i = \beta_0 + \beta_1 X_{i,1} + \beta_2 X_{i,2} + \ldots + \beta_k X_{i,k}$
 3. **Link function**: The element that connects the random component with the systematic component $\eta_i$. The connection is made through a function of $\eta_i: h(\eta_i) = \mu_i$
 
-Let us look at two common GLMs, the Logistic Regression, and the Poisson Regression. 
+Let us look at two common GLMs, the Logistic Regression and the Poisson Regression. 
 
 
 ### Logistic Regression 
@@ -90,4 +92,4 @@ For example:
 - **Traffic Analysis:** Predicting the number of road accidents at an intersection based on traffic volume and weather conditions.
 
 ### Closing note
-In short, understanding linear and generalized linear models provides data scientists with powerful tools to model a wide range of data. While we’ve explored logistic and poisson regression, it’s worth noting that there are many other GLMs, each tailored to address specific types of data and research questions, making this family of models incredibly versatile.
+In short, understanding linear and generalized linear models provides data scientists with powerful tools to model a wide range of data. While we’ve explored logistic and poisson regression, it’s worth noting that there are many other GLMs, each tailored to address specific types of data, making this family of models incredibly versatile.
